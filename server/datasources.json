@@ -1,0 +1,14 @@
+{
+  "db": {
+    "url": "mongodb://localhost:27017",
+    "name": "db",
+    "connector": "mongodb"
+  },
+  "push": {
+    "name": "push",
+    "connector": "loopback-component-push",
+    "installation": "installation",
+    "notification": "notification",
+    "application": "application"
+  }
+}
