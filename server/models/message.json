@@ -1,0 +1,33 @@
+{
+  "name": "message",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": false
+    },
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "sent_date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "messageId": {
+      "type": "hasMany",
+      "model": "device_message",
+      "foreignKey": "messageIdFK",
+      "through": "device_message"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

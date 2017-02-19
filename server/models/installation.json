@@ -1,0 +1,16 @@
+{
+  "name": "installation",
+  "base": "Installation",
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "deviceTokenId": {
+      "type": "hasMany",
+      "model": "device_message",
+      "foreignKey": "deviceTokenFK",
+      "through": "device_message"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

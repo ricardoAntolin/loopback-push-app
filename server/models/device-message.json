@@ -1,0 +1,48 @@
+{
+  "name": "device_message",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "deviceTokenId": {
+      "type": "string",
+      "required": true
+    },
+    "messageId": {
+      "type": "number",
+      "required": true
+    },
+    "sent": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "read": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "deleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "id": {
+      "type": "belongsTo",
+      "model": "message",
+      "foreignKey": "messageIdDeviceFK"
+    },
+    "deviceToken": {
+      "type": "belongsTo",
+      "model": "installation",
+      "foreignKey": "deviceTokenIdFK"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
