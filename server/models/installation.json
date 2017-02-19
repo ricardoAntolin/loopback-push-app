@@ -12,5 +12,44 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "enrollDevice": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "deviceTokenId",
+          "type": "string",
+          "required": true,
+          "description": "Device Token",
+          "http": {
+            "source": "form"
+          }
+        },
+        {
+          "arg": "deviceType",
+          "type": "string",
+          "required": true,
+          "description": "Device Type ios or android",
+          "http": {
+            "source": "form"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "objectCreated",
+          "type": "object",
+          "root": true,
+          "description": "Instalation created"
+        }
+      ],
+      "description": "Enroll device to system",
+      "http": [
+        {
+          "path": "/enrollDevice",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

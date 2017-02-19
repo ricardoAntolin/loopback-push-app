@@ -10,6 +10,10 @@
       "type": "number",
       "required": false
     },
+    "title": {
+      "type": "string",
+      "required": true
+    },
     "text": {
       "type": "string",
       "required": true
@@ -21,11 +25,9 @@
   },
   "validations": [],
   "relations": {
-    "messageId": {
+    "deviceMessages": {
       "type": "hasMany",
-      "model": "device_message",
-      "foreignKey": "messageIdFK",
-      "through": "device_message"
+      "model": "device_message"
     }
   },
   "acls": [],

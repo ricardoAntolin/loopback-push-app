@@ -32,15 +32,15 @@
   },
   "validations": [],
   "relations": {
-    "id": {
+    "message": {
       "type": "belongsTo",
       "model": "message",
-      "foreignKey": "messageIdDeviceFK"
+      "foreignKey": "messageId"
     },
     "deviceToken": {
       "type": "belongsTo",
       "model": "installation",
-      "foreignKey": "deviceTokenIdFK"
+      "foreignKey": "deviceTokenId"
     }
   },
   "acls": [],

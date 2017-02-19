@@ -35,10 +35,6 @@
   },
   "device_message": {
     "dataSource": "db",
-    "public": false
-  },
-  "deviceMessageResponse": {
-    "dataSource": null,
     "public": true
   }
 }
