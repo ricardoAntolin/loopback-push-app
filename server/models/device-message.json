@@ -44,5 +44,32 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "deleteAllDeviceMessages": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "deviceToken",
+          "type": "string",
+          "required": true,
+          "description": "Device Token"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "count",
+          "type": "number",
+          "root": true,
+          "description": "Deleted count"
+        }
+      ],
+      "description": "Mark as delete all devide message",
+      "http": [
+        {
+          "path": "/deleteAllDeviceMessages",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

@@ -9,8 +9,8 @@ exports.appName = 'asv-push-project';
 exports.gcmServerApiKey = 'AAAApSt3pYc:APA91bHikZwlp0TFNmXCxDT81AJ6Bu9KpzqnoDTUZLaLOg3dakBzpUJenbp2_FnGlR9nagkI9CQSuW8E9ipWs6zipb580eJBtJw_xaM-xWfvBXkaIvyoi1g0eYB7lHk3l_A4qLrNYJ14';
 
 // You may want to use your own credentials here
-//exports.apnsCertData = readCredentialsFile('apns_cert_dev.pem');
-//exports.apnsKeyData =readCredentialsFile('apns_key_dev.pem');
+exports.apnsCertData = readCredentialsFile('apns_cert_dev.pem');
+exports.apnsKeyData =readCredentialsFile('apns_key_dev.pem');
 
 
 //--- Helper functions ---

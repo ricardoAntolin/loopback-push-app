@@ -20,19 +20,13 @@
           "arg": "deviceTokenId",
           "type": "string",
           "required": true,
-          "description": "Device Token",
-          "http": {
-            "source": "form"
-          }
+          "description": "Device Token"
         },
         {
           "arg": "deviceType",
           "type": "string",
           "required": true,
-          "description": "Device Type ios or android",
-          "http": {
-            "source": "form"
-          }
+          "description": "Device Type ios or android"
         }
       ],
       "returns": [

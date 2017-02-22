@@ -9,7 +9,7 @@ module.exports = (Message) => {
 		if (ctx.isNewInstance) {
 			Message.count((err, count) => {
 				if (err) throw err;
-				ctx.instance.id = count;
+				ctx.instance.id = count + 1;
 				next();
 			})
 		}
@@ -21,11 +21,10 @@ module.exports = (Message) => {
 		var Installation = app.models.installation;
 		var Notification = app.models.notification;
 		var DeviceMessage = app.models.device_message;
-		var badge = 0;
 		var notification = new Notification({
 			expirationInterval: 3600, // Expires 1 hour from now.
-			badge: badge++,
-			sound: 'ping.aiff',
+			badge: 0,
+			sound: 'default',
 			alert: 'new Message recieved',
 			messageFrom: 'ASV'
 		});
@@ -47,38 +46,39 @@ module.exports = (Message) => {
 
 		function _customNotifyByQuery(cb) {
 			assert.ok(cb, 'callback should be defined');
-			Installation.find('', function(err, installationList) {
+			Installation.find('', (err, installationList) => {
 				if (err) return cb(err);
-				async.each(
-					installationList,
-					function(installation, next) {
-						var deviceMessage = new DeviceMessage({
-							deviceTokenId: installation.deviceToken,
-							messageId: ctx.instance.id,
-							sent: false,
-							read: false,
-							deleted: false
-						});
+				installationList.map((installation) => {
+					var deviceMessage = new DeviceMessage({
+						deviceTokenId: installation.deviceToken,
+						messageId: ctx.instance.id,
+						sent: false,
+						read: false,
+						deleted: false
+					});
 
-						DeviceMessage.create(deviceMessage,(err,res) =>{
-							if(err) next(err);
-							Push.notify(installation, notification, (err) =>{
-								if(err) next(err);
-								res.sent = true;
-								next();
+					DeviceMessage.create(deviceMessage, (err, res) => {
+						if (err) cb(err);
+						installation.badge++;
+						notification.badge = installation.badge;
+						Push.notify(installation, notification, (err) => {
+							if (err) cb(err);
+							res.sent = true;
+							Installation.updateOrCreate(installation, '',(err,obj) => {
+								if(err) cb(err);
+								cb();
 							});
 						});
-						
-					},
-					cb
-				);
+					});
+				});
 			});
 		};
 	});
 
 	Message.getDeviceMessages = (deviceToken, cb) => {
 
-		let filter = {include: {
+		let filter = {
+			include: {
 				relation: 'deviceMessages',
 				scope: {
 					where: {
@@ -88,12 +88,6 @@ module.exports = (Message) => {
 			}
 		};
 
-		Message.find(filter,cb);
+		Message.find(filter, cb);
 	};
-
-	Message.remoteMethod('getDeviceMessages', {
-		accepts: {args: 'deviceToken', type: 'string'},
-		returns: {arg: 'messageList', type: 'object', root: true},
-    	http: {verb: 'get', path: '/byDevice'}
-	})
 };

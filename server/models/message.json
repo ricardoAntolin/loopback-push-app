@@ -31,5 +31,35 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "getDeviceMessages": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "deviceToken",
+          "type": "string",
+          "required": true,
+          "description": "Device token",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "messageList",
+          "type": "array",
+          "root": true,
+          "description": "Message list of device"
+        }
+      ],
+      "description": "Get device messages",
+      "http": [
+        {
+          "path": "/byDevice",
+          "verb": "get"
+        }
+      ]
+    }
+  }
 }
